@@ -1,9 +1,9 @@
 module Main where
 
-import qualified Data.ByteString.Char8            as ByteString
-import qualified Data.Map                         as Map
-import qualified Data.List                        as List
-import qualified Data.Set                         as Set
+import qualified Data.ByteString.Char8 as ByteString
+import qualified Data.HashMap.Strict   as Map
+import qualified Data.List             as List
+import qualified Data.Set              as Set
 import Data.Maybe (fromMaybe)
 import Data.Char (ord)
 import Data.Foldable (foldl')

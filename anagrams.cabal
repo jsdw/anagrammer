@@ -20,6 +20,7 @@ executable anagrams1
   build-depends:       base
                      , bytestring
                      , containers
+                     , unordered-containers
   default-language:    Haskell2010
 
 source-repository head
