@@ -1,45 +1,43 @@
 module Main where
 
 import qualified Data.ByteString.Char8 as ByteString
+import qualified Data.ByteString       as ByteString8
 import qualified Data.HashMap.Strict   as Map
 import qualified Data.List             as List
 import qualified Data.Set              as Set
 import Data.Maybe (fromMaybe)
-import Data.Char (ord)
 import Data.Foldable (foldl')
 import Data.ByteString.Char8 (ByteString)
 import Control.Monad (forM_)
-import System.Environment (getArgs, withArgs)
-
-mainWith :: String -> IO ()
-mainWith s = withArgs [s] main
+import System.Environment (getArgs)
 
 main :: IO ()
 main = do
     -- read the filename:
-    (fileName : _) <- getArgs
+    args <- getArgs
 
     -- load the file:
-    file <- ByteString.readFile fileName
+    file <- ByteString.readFile (if null args then "shakespeare.txt" else head args)
 
     -- parse the file, find anagrams and output stats:
     outputStats (anagrams $ ByteString.splitWith (== '\n') file)
 
 -- tokenise a line into words (all lowercase)
 tokenise :: ByteString -> [ByteString]
-tokenise = fmap (ByteString.map lowerCase) . filter (/= "") . ByteString.splitWith notAlpha
+tokenise = filter (/= "") . ByteString.splitWith notAlpha . ByteString8.map lowerCase
   where
-    notAlpha  c = let nc = ord c in nc < 65 || nc > 122 || (nc > 90 && nc < 97)
-    lowerCase c = let nc = ord c in if nc > 64 && nc < 91 then toEnum (nc+32) else c
+    notAlpha  c = c < 'A' || c > 'z' || (c > 'Z' && c < 'a')
+    lowerCase c = if c > 64 && c < 91 then c+32 else c
 
 -- take in lines of words, and output groups of anagram lines:
 anagrams :: [ByteString] -> [[ByteString]]
-anagrams = foldl' collapse [] . foldl' mappify Map.empty . fmap (\b -> (tokenise b, b))
+anagrams = foldl' collapse [] . foldl' mappify Map.empty
   where
     -- step 1: collect into a map:
-    mappify !m ([],_)      = m
-    mappify !m (toks,orig) =
-        let !wkey = List.sort toks
+    mappify !m ""   = m
+    mappify !m orig =
+        let !toks = tokenise orig
+            !wkey = List.sort toks
             !key  = ByteString.sort $ ByteString.concat toks
             !cur  = fromMaybe [] (Map.lookup key m)
         in  Map.insert key ((wkey,orig) : cur) m
@@ -52,9 +50,10 @@ anagrams = foldl' collapse [] . foldl' mappify Map.empty . fmap (\b -> (tokenise
 -- output stats:
 outputStats :: [[ByteString]] -> IO ()
 outputStats matches = do
-    forM_ matches $ \ms -> do
+    forM_ (List.sort matches) $ \ms -> do
         forM_ ms ByteString.putStrLn
-        ByteString.putStrLn "\n"
+        ByteString.putStr "\n"
+    putStrLn $ (show $ length matches) ++ " anagram sets found."
 
 -- take key-value pairs and return values, deduping by keys
 dedupe :: Ord key => [(key,val)] -> [val]
