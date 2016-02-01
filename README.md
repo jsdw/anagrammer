@@ -29,7 +29,7 @@ Bagpipes he played.
 
 # Timings
 
-Currently, a Basic and MutableHash implementation exists. Times taken (average of 10 runs) on the above source text are:
+Currently, a Basic and MutableHash implementation exists. Times taken (average of 10 runs on a 4Ghz Intel i7 iMac, 8GB 1600Mhz DDR3) on the "shakespeare.txt" source text are:
 
 | Implementation | Created By | Time taken |
 |----------------|------------|------------|
