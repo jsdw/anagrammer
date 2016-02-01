@@ -29,12 +29,14 @@ Bagpipes he played.
 
 # Timings
 
-Currently, a Basic and MutableHash implementation exists. Times taken (average of 10 runs on a 4Ghz Intel i7 iMac, 8GB 1600Mhz DDR3) on the "shakespeare.txt" source text are:
+Currently, a Basic and MutableHash implementation exists. Times taken (average of 10 runs on a 4Ghz Intel i7 iMac, 8GB 1600Mhz DDR3 using `time for i in {0..9}; do program-exe; done`) on the "shakespeare.txt" source text are:
 
-| Implementation | Created By | Time taken |
-|----------------|------------|------------|
-| Basic          | jsdw       | 0.908s     |
-| MutableHash    | jsdw       | 1.410s     |
+| Implementation | Created By    | Time taken |
+|----------------|---------------|------------|
+| Basic          | jsdw          | 0.822s     |
+| Basic2         | /r/bartavelle | 0.755s     |
+| MutableHash    | jsdw          | 1.258s     |
+
 
 # Installation
 
@@ -45,3 +47,7 @@ git clone https://github.com/jsdw/hs-anagrammer
 cd hs-anagrammer
 stack install
 ```
+
+# License
+
+This is in the public domain; do whatever you like with it!

@@ -31,21 +31,17 @@ tokenise = filter (/= "") . ByteString.splitWith notLowercaseAlpha . ByteString8
 
 -- take in lines of words, and output groups of anagram lines:
 anagrams :: [ByteString] -> [[ByteString]]
-anagrams = foldl' collapse [] . foldl' mappify Map.empty
+anagrams = filter ( (>1) . length )
+         . map dedupe
+         . Map.elems
+         . Map.fromListWith (++)
+         . map mappify'
   where
-    -- step 1: collect into a map:
-    mappify !m ""   = m
-    mappify !m orig =
-        let !toks = tokenise orig
-            !wkey = List.sort toks
-            !key  = ByteString.sort $ ByteString.concat toks
-            !cur  = fromMaybe [] (Map.lookup key m)
-        in  Map.insert key ((wkey,orig) : cur) m
-
-    -- step 2: reduce into groups:
-    collapse list ws = case dedupe ws of
-        deduped@(_ : _ : _) -> deduped : list
-        _ -> list
+    mappify' orig = (key, [(wkey, orig)])
+      where
+        !toks = tokenise orig
+        !wkey = List.sort toks
+        !key  = ByteString.sort $ ByteString.concat toks
 
 -- output stats:
 outputStats :: [[ByteString]] -> IO ()
