@@ -31,10 +31,10 @@ Bagpipes he played.
 
 Currently, a Basic and MutableHash implementation exists. Times taken (average of 10 runs) on the above source text are:
 
-| Implementation | Time taken |
-|----------------|------------|
-| Basic          | 0.908s     |
-| MutableHash    | 1.410s     |
+| Implementation | Created By | Time taken |
+|----------------|------------|------------|
+| Basic          | jsdw       | 0.908s     |
+| MutableHash    | jsdw       | 1.410s     |
 
 # Installation
 
