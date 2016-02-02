@@ -5,8 +5,6 @@ import qualified Data.ByteString       as ByteString8
 import qualified Data.HashMap.Strict   as Map
 import qualified Data.List             as List
 import qualified Data.Set              as Set
-import Data.Maybe (fromMaybe)
-import Data.Foldable (foldl')
 import Data.ByteString.Char8 (ByteString)
 import Control.Monad (forM_)
 import System.Environment (getArgs)
@@ -20,7 +18,7 @@ main = do
     file <- ByteString.readFile (if null args then "shakespeare.txt" else head args)
 
     -- parse the file, find anagrams and output stats:
-    outputStats (anagrams $ ByteString.splitWith (== '\n') file)
+    outputStats (anagrams $ filter (not . ByteString.null) $ ByteString.splitWith (== '\n') file)
 
 -- tokenise a line into words (all lowercase)
 tokenise :: ByteString -> [ByteString]
