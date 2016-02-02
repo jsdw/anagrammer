@@ -35,6 +35,8 @@ executable basic-bartavelle
                      , bytestring
                      , containers
                      , unordered-containers
+                     , vector
+                     , hashable
   default-language:    Haskell2010
 
 -- use hashtable
