@@ -9,7 +9,7 @@ build-type:          Simple
 cabal-version:       >=1.10
 
 -- the base implementation with obvious optimisations
-executable basic
+executable anagrams-basic
   hs-source-dirs:      app
   main-is:             Basic.hs
   default-extensions:  OverloadedStrings, BangPatterns
@@ -23,24 +23,8 @@ executable basic
                      , unordered-containers
   default-language:    Haskell2010
 
--- clearing up the anagram code using more library functions
-executable basic-bartavelle
-  hs-source-dirs:      app
-  main-is:             Basic2.hs
-  default-extensions:  OverloadedStrings, BangPatterns
-  ghc-prof-options:    -auto-all -caf-all
-  ghc-options:         -Wall -threaded -rtsopts
-                       -O2 -optc-O3 -funfolding-use-threshold=100
-  build-depends:       base
-                     , bytestring
-                     , containers
-                     , unordered-containers
-                     , vector
-                     , hashable
-  default-language:    Haskell2010
-
 -- use hashtable
-executable mutable-hash
+executable anagrams-mutable-hash
   hs-source-dirs:      app
   main-is:             MutableHash.hs
   default-extensions:  OverloadedStrings, BangPatterns, ScopedTypeVariables
@@ -52,6 +36,22 @@ executable mutable-hash
                      , bytestring
                      , containers
                      , hashtables
+  default-language:    Haskell2010
+
+-- Bartavelles submission
+executable anagrams-bartavelle
+  hs-source-dirs:      app
+  main-is:             Bartavelle.hs
+  default-extensions:  OverloadedStrings, BangPatterns, FlexibleInstances
+  ghc-prof-options:    -auto-all -caf-all
+  ghc-options:         -Wall -threaded -rtsopts
+                       -O2 -optc-O3 -funfolding-use-threshold=100
+  build-depends:       base
+                     , bytestring
+                     , containers
+                     , unordered-containers
+                     , vector
+                     , hashable
   default-language:    Haskell2010
 
 -- submission from Bodigrim
