@@ -34,8 +34,10 @@ Currently, a Basic and MutableHash implementation exists. Times taken (average o
 | Implementation | Created By    | Time taken |
 |----------------|---------------|------------|
 | Basic          | jsdw          | 0.822s     |
-| Basic2         | /r/bartavelle | 0.755s     |
 | MutableHash    | jsdw          | 1.258s     |
+| Basic2         | /r/bartavelle | 0.755s     |
+| Bodigrim       | Bodigrim      | 0.188s     |
+
 
 
 # Installation
