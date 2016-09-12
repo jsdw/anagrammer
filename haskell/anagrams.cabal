@@ -2,7 +2,7 @@ name:                anagrams
 version:             0.1.0.0
 synopsis:            Find anagrams across lines of an ascii text file
 description:         Please see README.md
-homepage:            http://github.com/githubuser/anagrams#readme
+homepage:            http://github.com/jsdw/anagrams
 license:             PublicDomain
 author:              James Wilson
 build-type:          Simple
@@ -87,4 +87,4 @@ executable anagrams-bodigrim
 
 source-repository head
   type:     git
-  location: https://github.com/githubuser/anagrams
+  location: https://github.com/jsdw/anagrams

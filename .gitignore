@@ -1,3 +1,4 @@
-.stack-work
-*.prof
-*.hp
+haskell/.stack-work
+haskell/*.prof
+haskell/*.hptarget
+rust/target
