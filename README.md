@@ -29,7 +29,7 @@ Bagpipes he played.
 
 # Timings
 
-Currently, a Basic and MutableHash implementation exists. Times taken (average of 10 runs on a 4Ghz Intel i7 iMac, 8GB 1600Mhz DDR3 using `time for i in {0..9}; do program-exe; done`) on the "shakespeare.txt" source text are:
+Several implementations exist in an attempt to etch out as much speed as possible. Times taken (average of 10 runs on a 4Ghz Intel i7 iMac, 8GB 1600Mhz DDR3 using `time for i in {0..9}; do program-exe; done`) on the "shakespeare.txt" source text are:
 
 | Implementation | Created By    | Time taken |
 |----------------|---------------|------------|

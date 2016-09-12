@@ -49,7 +49,7 @@ anagrams = filter subSingleton
         key = ByteString8.foldl' addChar 0 orig
         addChar :: Int -> Word8 -> Int
         addChar acc c
-          |c > 96 && c < 123 =
+          | c > 96 && c < 123 =
              acc + Bit.shiftL 1 (fromIntegral c - 91) + 1
           | c > 64 && c < 91  =
               acc + Bit.shiftL 1 (fromIntegral c - 59) + 1
