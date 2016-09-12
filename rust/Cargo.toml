@@ -1,6 +1,11 @@
 [package]
-name = "rust"
+name = "anagrammer"
 version = "0.1.0"
 authors = ["James Wilson <me@unbui.lt>"]
+publish = false
+
+[[bin]]
+name = "rs_anagrams_basic"
+path = "src/basic.rs"
 
 [dependencies]
