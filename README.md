@@ -38,7 +38,7 @@ Several implementations exist in an attempt to etch out as much speed as possibl
 | Bodigrim       | Haskell  | Bodigrim      | 0.188s     |
 | Bartavelle     | Haskell  | /r/bartavelle | 0.145s     |
 | Kuribas        | Haskell  | /r/kuribas    | 0.106s     |
-| Basic          | Rust     | jsdw          | 0.599s     |
+| Basic          | Rust     | jsdw          | 0.476s     |
 
 
 # Installation

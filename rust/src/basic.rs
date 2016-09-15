@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 use std::fs::File;
+use std::ascii::AsciiExt;
 use std::io::prelude::*;
 use std::env;
 use std::str;
@@ -40,7 +41,9 @@ fn read(filename : &str) -> String {
 fn into_map(contents : &String) -> Map {
 
     let mut outer_map = HashMap::new();
-    for line in contents.lines().filter(|&l| l != "") {
+    for line in contents.lines() {
+
+        if line == "" { continue; }
 
         let (outer_hash, inner_hash) = hashify(&line.to_string());
         let mut inner_map = outer_map
@@ -57,7 +60,7 @@ fn into_map(contents : &String) -> Map {
 // tokenize a string into words:
 fn tokenize(line : &String) -> Vec<String> {
     let mut toks = line
-        .to_lowercase()
+        .to_ascii_lowercase()
         .split(|c| c < 'a' || c > 'z' )
         .filter(|&c| c != "" )
         .map(|s| s.to_string())
@@ -68,23 +71,18 @@ fn tokenize(line : &String) -> Vec<String> {
 }
 
 // generate our inner and outer comparison values:
-fn hashify(line : &String) -> ( String, Vec<String> ) {
+fn hashify(line : &String) -> ( Vec<u8>, Vec<String> ) {
 
     let tokens = tokenize(line);
 
-    //push all letters from tokens into letters:
+    //push all letters from tokens into sorted vec:
     let mut letters = Vec::new();
     for word in &tokens {
-        for c in word.chars() {
-            letters.push(c);
-        }
+        letters.extend( word.as_bytes().clone() );
     }
-
-    // sort the letters and collect into String:
     letters.sort();
-    let s = letters.into_iter().collect();
 
-    (s, tokens)
+    (letters, tokens)
 
 }
 
@@ -111,4 +109,4 @@ fn print_results(map : &Map) {
 }
 
 
-type Map<'a> = HashMap<String,HashMap<Vec<String>,&'a str>>;
+type Map<'a> = HashMap< Vec<u8>, HashMap< Vec<String>, &'a str > >;

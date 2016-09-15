@@ -4,6 +4,9 @@ version = "0.1.0"
 authors = ["James Wilson <me@unbui.lt>"]
 publish = false
 
+[profile.release]
+debug = true
+
 [[bin]]
 name = "rs_anagrams_basic"
 path = "src/basic.rs"
