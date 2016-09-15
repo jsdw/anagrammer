@@ -31,23 +31,46 @@ Bagpipes he played.
 
 Several implementations exist in an attempt to etch out as much speed as possible. Times taken (average of 10 runs on a 4Ghz Intel i7 iMac, 8GB 1600Mhz DDR3 using `time for i in {0..9}; do program-exe; done`) on the "shakespeare.txt" source text are:
 
-| Implementation | Created By    | Time taken |
-|----------------|---------------|------------|
-| Basic          | jsdw          | 0.805s     |
-| MutableHash    | jsdw          | 1.193s     |
-| Bodigrim       | Bodigrim      | 0.188s     |
-| Bartavelle     | /r/bartavelle | 0.145s     |
-| Kuribas        | /r/kuribas    | 0.106s     |
+| Implementation | Language | Created By    | Time taken |
+|----------------|----------|---------------|------------|
+| Basic          | Haskell  | jsdw          | 0.805s     |
+| MutableHash    | Haskell  | jsdw          | 1.193s     |
+| Bodigrim       | Haskell  | Bodigrim      | 0.188s     |
+| Bartavelle     | Haskell  | /r/bartavelle | 0.145s     |
+| Kuribas        | Haskell  | /r/kuribas    | 0.106s     |
+| Basic          | Rust     | jsdw          | 0.599s     |
+
 
 # Installation
 
-Use the `stack` tool to install, so the full steps will be something like:
+First, clone the repo and cd into it
 
 ```
 git clone https://github.com/jsdw/hs-anagrammer
 cd hs-anagrammer
+```
+
+## Haskell
+
+Use the `stack` tool to install, so the full steps inside the cloned repo will be something like:
+
+```
+cd haskell
 stack install
 ```
+
+This will put binaries in `~/.local/bin` or something similar.
+
+## Rust
+
+Use the `cargo` tool to install (`--release` applies optimisations).
+
+```
+cd rust
+cargo install --release
+```
+
+Binaries will end up in `~/.cargo/bin` or something similar.
 
 # License
 
