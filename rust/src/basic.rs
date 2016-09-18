@@ -1,4 +1,7 @@
-use std::collections::HashMap;
+
+extern crate fnv;
+
+use fnv::FnvHashMap;
 use std::fs::File;
 use std::ascii::AsciiExt;
 use std::io::prelude::*;
@@ -40,7 +43,7 @@ fn read(filename : &str) -> String {
 // put contents of a file into a hash map:
 fn into_map(contents : &String) -> Map {
 
-    let mut outer_map = HashMap::new();
+    let mut outer_map = FnvHashMap::default();
     for line in contents.lines() {
 
         if line == "" { continue; }
@@ -48,7 +51,7 @@ fn into_map(contents : &String) -> Map {
         let (outer_hash, inner_hash) = hashify(&line.to_string());
         let mut inner_map = outer_map
             .entry(outer_hash)
-            .or_insert(HashMap::new());
+            .or_insert(FnvHashMap::default());
 
         inner_map.insert(inner_hash, line);
 
@@ -109,4 +112,4 @@ fn print_results(map : &Map) {
 }
 
 
-type Map<'a> = HashMap< Vec<u8>, HashMap< Vec<String>, &'a str > >;
+type Map<'a> = FnvHashMap< Vec<u8>, FnvHashMap< Vec<String>, &'a str > >;
