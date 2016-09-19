@@ -40,6 +40,7 @@ Several implementations exist in an attempt to etch out as much speed as possibl
 | Kuribas        | Haskell  | /r/kuribas    | 0.106s     |
 | Basic          | Rust     | jsdw          | 0.460s     |
 | Basic (u8)     | Rust     | jsdw          | 0.478s     |
+| Basic          | Go       | jsdw          | 0.513s     |
 
 # Installation
 
@@ -71,6 +72,16 @@ cargo install --release
 ```
 
 Binaries will end up in `~/.cargo/bin` or something similar.
+
+## Go
+
+```
+cd go
+export GOPATH=$(pwd)
+go install ...
+```
+
+Binaries will be in the `go/bin` folder
 
 # License
 
