@@ -15,5 +15,9 @@ path = "src/basic.rs"
 name = "rs_anagrams_basic_u8"
 path = "src/u8.rs"
 
+[[bin]]
+name = "rs_anagrams_two_stage"
+path = "src/two_stage.rs"
+
 [dependencies]
 fnv = { git = "https://github.com/servo/rust-fnv.git", rev = "4763756d50936a227b1687b0fb1464c784c4c9c3" }

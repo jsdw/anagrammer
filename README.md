@@ -40,6 +40,7 @@ Several implementations exist in an attempt to etch out as much speed as possibl
 | Kuribas        | Haskell  | /r/kuribas    | 0.106s     |
 | Basic          | Rust     | jsdw          | 0.460s     |
 | Basic (u8)     | Rust     | jsdw          | 0.478s     |
+| Two Stage      | Rust     | jsdw          | 0.275s     |
 | Basic          | Go       | jsdw          | 0.513s     |
 
 # Installation
