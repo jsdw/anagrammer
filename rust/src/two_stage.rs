@@ -60,6 +60,8 @@ fn into_results(m : Map) -> Vec<Vec<String>> {
     let mut out = Vec::new();
     for values in m.values() {
 
+        if values.len() == 1 { continue }
+
         let mut deduped = FnvHashSet::default();
         let mut filtered = Vec::new();
 
