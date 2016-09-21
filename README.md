@@ -41,6 +41,7 @@ Several implementations exist in an attempt to etch out as much speed as possibl
 | Basic          | Rust     | jsdw          | 0.460s     |
 | Basic (u8)     | Rust     | jsdw          | 0.478s     |
 | Two Stage      | Rust     | jsdw          | 0.178s     |
+| Custom Hash    | Rust     | jsdw          | 0.088s     |
 | Basic          | Go       | jsdw          | 0.513s     |
 
 # Installation
