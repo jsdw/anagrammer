@@ -2,5 +2,5 @@ haskell/.stack-work
 haskell/*.prof
 haskell/*.hptarget
 rust/target
-go/build
+go/bin
 go/pkg
