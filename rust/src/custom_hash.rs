@@ -37,14 +37,14 @@ fn read(filename : &str) -> String {
 }
 
 // put contents of a file into a hash map:
-fn into_map(contents : &String) -> FnvHashMap<QuickKey,Vec<String>> {
+fn into_map(contents : &str) -> FnvHashMap<QuickKey,Vec<String>> {
 
     let mut outer_map = FnvHashMap::default();
     for line in contents.lines() {
 
         if line == "" { continue; }
         let line_str = line.to_string();
-        let hash = quick_key(&line_str);
+        let hash = quick_key(line);
         outer_map
             .entry(hash)
             .or_insert(Vec::new())
@@ -89,7 +89,7 @@ fn into_results(m : FnvHashMap<QuickKey,Vec<String>>) -> Vec<Vec<String>> {
 }
 
 //quick initial key to roughly sort dupes into bins:
-fn quick_key(line : &String) -> QuickKey {
+fn quick_key(line : &str) -> QuickKey {
     let mut out = 0;
     for &b in line.as_bytes() {
         let b = if b > 64 && b < 91 { b - 65 } else if b > 96 && b < 123 { b - 97 } else { 254 };
@@ -101,11 +101,9 @@ fn quick_key(line : &String) -> QuickKey {
 type QuickKey = u64;
 
 //sort bytes in line:
-fn sorted_bytes(line : &String) -> Vec<u8> {
+fn sorted_bytes(line : &str) -> Vec<u8> {
     let mut line_vec = line
-        .clone()
-        .into_bytes()
-        .into_iter()
+        .bytes()
         .map(|b| if b > 64 && b < 91 { b + 32 } else { b })
         .filter(|&b| b > 96 && b < 123)
         .collect::<Vec<u8>>();
@@ -115,7 +113,7 @@ fn sorted_bytes(line : &String) -> Vec<u8> {
 }
 
 // tokenize a string into words:
-fn sorted_tokens(line : &String) -> Vec<String> {
+fn sorted_tokens(line : &str) -> Vec<String> {
     let mut toks = line
         .to_ascii_lowercase()
         .split(|c| c < 'a' || c > 'z' )
