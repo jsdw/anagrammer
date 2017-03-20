@@ -24,9 +24,13 @@ main = do
 
 -- tokenise a line into words (all lowercase)
 tokenise :: ByteString -> [ByteString]
-tokenise = filter (not . ByteString.null)
-         . ByteString.splitWith (not . lowercaseAlpha)
+tokenise = map (ByteString.filter isLetter)
+         . filter (not . ByteString.null)
+         . ByteString.splitWith (== ' ')
          . ByteString8.map toLower
+
+isLetter :: Char -> Bool
+isLetter c = c >= 'a' && c <= 'z'
 
 lowercaseAlpha :: Char -> Bool
 lowercaseAlpha c = c >= 'a' && c <= 'z'

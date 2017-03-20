@@ -79,14 +79,18 @@ fn tokenize(line : &Vec<u8>) -> Vec<Vec<u8>> {
         //lowercase:
         let b = if b > 64 && b < 91 { b + 32 } else { b };
 
-        //if not letter, add token to toks. else add letter to tok.
-        if b < 97 || b > 122 {
+        //if space, add token to output.
+        //if letter, add letter to token.
+        //if other, ignore.
+        if b == 32 {
             if tok.len() > 0 {
                 tokens.push(tok);
                 tok = Vec::new();
             }
+        } else if b < 97 || b > 122 {
+            //ignore non letter
         } else {
-            tok.push(b);
+            tok.push(b)
         }
 
     }

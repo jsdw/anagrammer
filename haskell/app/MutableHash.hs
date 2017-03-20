@@ -29,9 +29,9 @@ main = do
 
 -- tokenise a line into words (all lowercase)
 tokenise :: ByteString -> [ByteString]
-tokenise = filter (/= "") . ByteString.splitWith notLowercaseAlpha . ByteString8.map lowerCase
+tokenise = map (ByteString.filter isLetter) . filter (/= "") . ByteString.splitWith (== ' ') . ByteString8.map lowerCase
   where
-    notLowercaseAlpha  c = c < 'a' || c > 'z'
+    isLetter c = c >= 'a' && c <= 'z'
     lowerCase c = if c > 64 && c < 91 then c+32 else c
 
 -- take in lines of words, and output groups of anagram lines:
@@ -43,7 +43,9 @@ anagrams ls = runST $ do
             !wkey = List.sort toks
             !key  = ByteString.sort $ ByteString.concat toks
         cur <- fmap (fromMaybe []) (Hash.lookup hash key)
-        Hash.insert hash key ((wkey,orig) : cur)
+        if toks /= []
+            then Hash.insert hash key ((wkey,orig) : cur)
+            else return ()
     Hash.foldM (\a (_,vs) -> return $ collapse a vs) [] hash
   where
     -- reduce into groups:

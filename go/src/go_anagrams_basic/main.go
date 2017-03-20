@@ -41,11 +41,13 @@ func tokenize(line []byte) [][]byte {
         }
 
         // if not letter, add tok to toks, else add letter to tok
-        if b < 97 || b > 122 {
+        if b == 32 {
             if len(tok) > 0 {
                 toks = append(toks, tok)
                 tok = []byte{}
             }
+        } else if b < 97 || b > 122 {
+            //ignore non-letters
         } else {
             tok = append(tok, b)
         }

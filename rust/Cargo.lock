@@ -10,3 +10,5 @@ name = "fnv"
 version = "1.0.5"
 source = "git+https://github.com/servo/rust-fnv.git?rev=4763756d50936a227b1687b0fb1464c784c4c9c3#4763756d50936a227b1687b0fb1464c784c4c9c3"
 
+[metadata]
+"checksum fnv 1.0.5 (git+https://github.com/servo/rust-fnv.git?rev=4763756d50936a227b1687b0fb1464c784c4c9c3)" = "<none>"

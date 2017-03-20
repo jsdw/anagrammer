@@ -26,9 +26,10 @@ main = do
 
 -- tokenise a line into words (all lowercase)
 tokenise :: ByteString -> [ByteString]
-tokenise = filter (/= "") . ByteString.splitWith notAlpha . ByteString8.map lowerCase
+tokenise = map (ByteString.filter isLetter) . filter (/= "") . ByteString.splitWith isSpace . ByteString8.map lowerCase
   where
-    notAlpha  c = c < 'A' || c > 'z' || (c > 'Z' && c < 'a')
+    isSpace c = c == ' '
+    isLetter c = c >= 'a' && c <= 'z'
     lowerCase c = if c > 64 && c < 91 then c+32 else c
 
 -- | This hash does not change under permutations and adding nonAlpha symbols.

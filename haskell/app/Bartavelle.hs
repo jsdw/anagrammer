@@ -35,9 +35,10 @@ instance Hashable FreqCount where
 
 -- tokenise a line into words (all lowercase)
 tokenise :: ByteString -> [ByteString]
-tokenise = filter (/= "") . ByteString.splitWith notLowercaseAlpha . ByteString8.map lowerCase
+tokenise = map (ByteString.filter isLetter) . filter (/= "") . ByteString.splitWith isSpace . ByteString8.map lowerCase
   where
-    notLowercaseAlpha  c = c < 'a' || c > 'z'
+    isSpace c = c == ' '
+    isLetter c = c >= 'a' && c <= 'z'
     lowerCase c = if c > 64 && c < 91 then c+32 else c
 
 -- take in lines of words, and output groups of anagram lines:

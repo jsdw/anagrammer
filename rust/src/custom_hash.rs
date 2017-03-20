@@ -116,9 +116,9 @@ fn sorted_bytes(line : &str) -> Vec<u8> {
 fn sorted_tokens(line : &str) -> Vec<String> {
     let mut toks = line
         .to_ascii_lowercase()
-        .split(|c| c < 'a' || c > 'z' )
+        .split(' ')
         .filter(|&c| c != "" )
-        .map(|s| s.to_string())
+        .map(|c| c.replace(|c| c < 'a' || c > 'z', ""))
         .collect::<Vec<String>>();
 
     toks.sort();
