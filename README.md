@@ -1,8 +1,10 @@
 # Anagrammer
 
-A quick tool to find line-anagrams (excluding those where all of the words are the same) in some ascii file, just to have a play with profiling and whatnot. It takes one command line argument - the text file to read - and errors if this is not provided.
+Code in different languages aimed at completing the anagram challenge with rough benchmarks.
 
-Examples of anagrams (all matches are grouped):
+The anagram challenge is this: given an input file, find all groups of lines that contain all of the same letters but not the same words, where a word is defined as a group of tokens separated from other words by spaces and then ignoring any non letter (so for example "t'is" is the word "tis", "good-morrow" is the word "goodmorrow", "hello-there sir." is the words "hellothere" and "sir").
+
+Examples of groups of lines that are valid anagrams according to this:
 
 ```
 'Tis so, indeed.
@@ -11,13 +13,19 @@ Is't so, indeed.
 A thing
 Hang it!
 
+Good-morrow, cousin.
+Good morrow, cousin.
+
 No further, sir.
 For his return.
 ```
 
-Examples of invalid matches (only re-arrangement of words rather than of letters):
+Examples of invalid matches (letters are the same but words are as well):
 
 ```
+T'is morning, sir.
+Sir, tis morn-ing
+
 Hello there sir.
 Sir, hello there
 
@@ -33,16 +41,16 @@ Several implementations exist in an attempt to etch out as much speed as possibl
 
 | Implementation | Language | Created By    | Time taken |
 |----------------|----------|---------------|------------|
-| Basic          | Haskell  | jsdw          | 0.805s     |
-| MutableHash    | Haskell  | jsdw          | 1.193s     |
-| Bodigrim       | Haskell  | Bodigrim      | 0.188s     |
-| Bartavelle     | Haskell  | /r/bartavelle | 0.145s     |
-| Kuribas        | Haskell  | /r/kuribas    | 0.106s     |
-| Basic          | Rust     | jsdw          | 0.460s     |
-| Basic (u8)     | Rust     | jsdw          | 0.478s     |
-| Two Stage      | Rust     | jsdw          | 0.178s     |
-| Custom Hash    | Rust     | jsdw          | 0.088s     |
-| Basic          | Go       | jsdw          | 0.513s     |
+| Basic          | Haskell  | jsdw          | 0.929s     |
+| MutableHash    | Haskell  | jsdw          | 1.290s     |
+| Bodigrim       | Haskell  | Bodigrim      | 0.182s     |
+| Bartavelle     | Haskell  | /r/bartavelle | 0.149s     |
+| Kuribas        | Haskell  | /r/kuribas    | 0.111s     |
+| Basic          | Rust     | jsdw          | 0.417s     |
+| Basic (u8)     | Rust     | jsdw          | 0.416s     |
+| Two Stage      | Rust     | jsdw          | 0.135s     |
+| Custom Hash    | Rust     | jsdw          | 0.086s     |
+| Basic          | Go       | jsdw          | 0.545s     |
 
 # Installation
 
@@ -66,6 +74,8 @@ This will put binaries in `~/.local/bin` or something similar.
 
 ## Rust
 
+Examples compiled using Rust 1.16.0
+
 Use the `cargo` tool to install (`--release` applies optimisations).
 
 ```
@@ -76,6 +86,8 @@ cargo install --release
 Binaries will end up in `~/.cargo/bin` or something similar.
 
 ## Go
+
+Examples compiled using Go 1.8
 
 ```
 cd go
