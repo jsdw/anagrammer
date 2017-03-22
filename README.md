@@ -51,6 +51,7 @@ Several implementations exist in an attempt to etch out as much speed as possibl
 | Two Stage      | Rust     | jsdw          | 0.135s     |
 | Custom Hash    | Rust     | jsdw          | 0.086s     |
 | Basic          | Go       | jsdw          | 0.545s     |
+| Basic          | Java     | Chris C       | 0.686s     |
 
 # Installation
 
@@ -96,6 +97,23 @@ go install ...
 ```
 
 Binaries will be in the `go/bin` folder
+
+## Java
+
+Examples compiled using Java 1.8.0_121
+
+To compile:
+
+```
+cd java
+javac *.java
+```
+
+The compiled `.class` files can then be run like:
+
+```
+javac AnagramFinderBasic.class ../shakespeare.txt
+```
 
 # License
 

@@ -4,3 +4,4 @@ haskell/*.hptarget
 rust/target
 go/bin
 go/pkg
+java/**/*.class
