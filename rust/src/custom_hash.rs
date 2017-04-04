@@ -37,18 +37,17 @@ fn read(filename : &str) -> String {
 }
 
 // put contents of a file into a hash map:
-fn into_map(contents : &str) -> FnvHashMap<QuickKey,Vec<String>> {
+fn into_map(contents : &str) -> FnvHashMap<QuickKey,Vec<&str>> {
 
     let mut outer_map = FnvHashMap::default();
     for line in contents.lines() {
 
         if line == "" { continue; }
-        let line_str = line.to_string();
         let hash = quick_key(line);
         outer_map
             .entry(hash)
             .or_insert(Vec::new())
-            .push(line_str);
+            .push(line);
 
     }
     outer_map
@@ -56,10 +55,10 @@ fn into_map(contents : &str) -> FnvHashMap<QuickKey,Vec<String>> {
 }
 
 // take the map and turn into vec of dupes:
-fn into_results(m : FnvHashMap<QuickKey,Vec<String>>) -> Vec<Vec<String>> {
+fn into_results(m : FnvHashMap<QuickKey,Vec<&str>>) -> Vec<Vec<&str>> {
 
     let mut out = Vec::new();
-    for values in m.values().cloned() {
+    for values in m.values() {
 
         if values.len() == 1 { continue }
 
@@ -78,7 +77,7 @@ fn into_results(m : FnvHashMap<QuickKey,Vec<String>>) -> Vec<Vec<String>> {
         //collect values from inner hash, which have already
         //been deduped. ignore if only one remains, else push to output.
         for inner in second.values() {
-            let values = inner.values().cloned().collect::<Vec<String>>();
+            let values = inner.values().map(|&&v| v).collect::<Vec<&str>>();
             if values.len() == 1 { continue }
             out.push(values);
         }
@@ -126,7 +125,7 @@ fn sorted_tokens(line : &str) -> Vec<String> {
 }
 
 //read output from maps to print, ignoring single entries:
-fn print_results(anagrams : &Vec<Vec<String>>) {
+fn print_results(anagrams : &Vec<Vec<&str>>) {
 
     for dupes in anagrams {
         for dupe in dupes {
