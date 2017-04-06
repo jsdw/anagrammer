@@ -2,8 +2,14 @@
 name = "anagrammer"
 version = "0.1.0"
 dependencies = [
+ "crossbeam 0.2.10 (registry+https://github.com/rust-lang/crates.io-index)",
  "fnv 1.0.5 (git+https://github.com/servo/rust-fnv.git?rev=4763756d50936a227b1687b0fb1464c784c4c9c3)",
 ]
+
+[[package]]
+name = "crossbeam"
+version = "0.2.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "fnv"
@@ -11,4 +17,5 @@ version = "1.0.5"
 source = "git+https://github.com/servo/rust-fnv.git?rev=4763756d50936a227b1687b0fb1464c784c4c9c3#4763756d50936a227b1687b0fb1464c784c4c9c3"
 
 [metadata]
+"checksum crossbeam 0.2.10 (registry+https://github.com/rust-lang/crates.io-index)" = "0c5ea215664ca264da8a9d9c3be80d2eaf30923c259d03e870388eb927508f97"
 "checksum fnv 1.0.5 (git+https://github.com/servo/rust-fnv.git?rev=4763756d50936a227b1687b0fb1464c784c4c9c3)" = "<none>"

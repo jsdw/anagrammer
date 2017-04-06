@@ -39,19 +39,20 @@ Bagpipes he played.
 
 Several implementations exist in an attempt to etch out as much speed as possible. Times taken (average of 10 runs on a 4Ghz Intel i7 iMac, 8GB 1600Mhz DDR3 using `time for i in {0..9}; do program-exe; done`) on the "shakespeare.txt" source text are:
 
-| Implementation | Language | Created By    | Time taken |
-|----------------|----------|---------------|------------|
-| Basic          | Haskell  | jsdw          | 0.929s     |
-| MutableHash    | Haskell  | jsdw          | 1.290s     |
-| Bodigrim       | Haskell  | Bodigrim      | 0.182s     |
-| Bartavelle     | Haskell  | /r/bartavelle | 0.149s     |
-| Kuribas        | Haskell  | /r/kuribas    | 0.111s     |
-| Basic          | Rust     | jsdw          | 0.417s     |
-| Basic (u8)     | Rust     | jsdw          | 0.416s     |
-| Two Stage      | Rust     | jsdw          | 0.135s     |
-| Custom Hash    | Rust     | jsdw          | 0.051s     |
-| Basic          | Go       | jsdw          | 0.545s     |
-| Basic          | Java     | Chris C       | 0.686s     |
+| Implementation  | Language | Created By    | Time taken |
+|-----------------|----------|---------------|------------|
+| Basic           | Haskell  | jsdw          | 0.929s     |
+| MutableHash     | Haskell  | jsdw          | 1.290s     |
+| Bodigrim        | Haskell  | Bodigrim      | 0.182s     |
+| Bartavelle      | Haskell  | /r/bartavelle | 0.149s     |
+| Kuribas         | Haskell  | /r/kuribas    | 0.111s     |
+| Basic           | Rust     | jsdw          | 0.417s     |
+| Basic (u8)      | Rust     | jsdw          | 0.416s     |
+| Two Stage       | Rust     | jsdw          | 0.135s     |
+| Custom Hash     | Rust     | jsdw          | 0.051s     |
+| Custom Hash Par | Rust     | jsdw          | 0.063s     |
+| Basic           | Go       | jsdw          | 0.545s     |
+| Basic           | Java     | Chris C       | 0.686s     |
 
 # Installation
 
