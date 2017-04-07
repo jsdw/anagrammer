@@ -28,5 +28,5 @@ name = "rs_anagrams_custom_hash_par"
 path = "src/custom_hash_par.rs"
 
 [dependencies]
-fnv = { git = "https://github.com/servo/rust-fnv.git", rev = "4763756d50936a227b1687b0fb1464c784c4c9c3" }
 crossbeam = "0.2"
+fnv = "1.0.5"

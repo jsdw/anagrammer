@@ -46,7 +46,7 @@ fn into_map(contents : &str) -> FnvHashMap<QuickKey,Vec<&str>> {
         let hash = quick_key(line);
         outer_map
             .entry(hash)
-            .or_insert(Vec::new())
+            .or_insert(Vec::with_capacity(1))
             .push(line);
 
     }
