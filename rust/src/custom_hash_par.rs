@@ -10,8 +10,9 @@ use std::sync::mpsc::{channel,Sender,Receiver};
 use std::env;
 use std::str;
 
-// how many threads do we want? Actually, it seems to be faster with 1 thread at the moment..
-const COUNT : usize = 3;
+// how many threads do we want? The work done on the threads is quite small, and so adding more threads
+// doesnt help beyond 2..
+const COUNT : usize = 2;
 
 fn main() {
 
@@ -32,33 +33,34 @@ fn main() {
 
         // read lines, splitting to worker threads to do the lifting.
         for line in contents.lines() {
-            if line == "" { continue; }
-            let hash = quick_key(line);
+            if line == "" { continue }
+            let hash = very_quick_key(line);
             workers
-                .get(hash.count_ones() as usize % COUNT).unwrap()
-                .send((hash, line)).unwrap();
+                .get(hash % COUNT).unwrap()
+                .send(line).unwrap();
         }
 
     });
 
 }
 
-fn worker<'a>(scope: &crossbeam::Scope<'a>, out: Sender<Vec<&'a str>>) -> Sender<(QuickKey,&'a str)> {
-        let (tx, rx) = channel();
-        scope.spawn(move || {
+fn worker<'a>(scope: &crossbeam::Scope<'a>, out: Sender<Vec<&'a str>>) -> Sender<&'a str> {
+    let (tx, rx) = channel();
+    scope.spawn(move || {
 
-            let mut outer_map = FnvHashMap::default();
-            for (hash, line) in rx {
-                outer_map
-                    .entry(hash)
-                    .or_insert(Vec::with_capacity(1))
-                    .push(line);
-            }
+        let mut outer_map = FnvHashMap::default();
+        for line in rx {
+            let hash = quick_key(line);
+            outer_map
+                .entry(hash)
+                .or_insert(Vec::with_capacity(1))
+                .push(line);
+        }
 
-            into_results(outer_map,out);
+        into_results(outer_map,out);
 
-        });
-        tx
+    });
+    tx
 }
 
 fn printer<'a>(scope: &crossbeam::Scope<'a>, rx: Receiver<Vec<&'a str>>) {
@@ -115,6 +117,17 @@ fn into_results<'a>(m : FnvHashMap<QuickKey,Vec<&'a str>>, chan : Sender<Vec<&'a
 
     }
 
+}
+
+//very quick initial key to roughly sort lines onto threads. Here we just
+//count the number of A's in a line to spread the work. Less robust across
+//datasets but pretty fast!
+fn very_quick_key(line : &str) -> usize {
+    let mut out = 0;
+    for &b in line.as_bytes() {
+        if b == 65 || b == 97 { out = out + 1 }
+    }
+    out
 }
 
 //quick initial key to roughly sort dupes into bins:

@@ -5,3 +5,4 @@ rust/target
 go/bin
 go/pkg
 java/**/*.class
+.history
